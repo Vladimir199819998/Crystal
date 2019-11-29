@@ -1,49 +1,151 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
 
-		<script src="js/reveal.js"></script>
+</head>
+<body>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <img width="100%" height="100%"
+                 src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/Crystal_language_logo.svg/1200px-Crystal_language_logo.svg.png"
+                 alt="">
+        </section>
+        <section>
+            <p><span class="font-weight-bold">Crystal</span> &mdash; это объектно-ориентированный язык программирования
+                общего назначения, спроектированный и разработанный Ary Borenszweig</p>
+        </section>
+        <section>
+            <section>
+            <pre>
+                <code>
+                    puts "Hello, world!"
+                </code>
+            </pre>
+            </section>
+            <section>
+            <pre>
+                <code>
+                    printf("%s\n", "Hello, world!")
+                </code>
+            </pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                Example program
+                <pre lang="crystal">
+                    <code>
+    require "http/server"
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+    server = HTTP::Server.new do |context|
+      context.response.content_type = "text/plain"
+      context.response.print "Hello world!
+                            The time is #{Time.local}"
+    end
+
+    address = server.bind_tcp 8080
+    puts "Listening on http://#{address}"
+    server.listen
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Basics</h3>
+                <ul>
+                    <li class="text-primary">Data types</li>
+                    <li class="text-muted">Conditions, Loops</li>
+                </ul>
+            </section>
+            <section>
+                <pre lang="crystal">
+                <code>
+                a = 5_i32 # Int32 by default
+                b = 6_i16
+                c = 7_u64
+                puts (a > b) ? "a > b" : "a <= b"
+                </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                <code>
+                   Output: a <= b
+                </code>
+                </pre>
+            </section>
+            <section>
+                <pre>
+                    <code>
+                        a = 1.0 # Float64
+                        b = 1.0_f32 # Float32
+                        c = 1e10 # Float64
+                    </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Char</h3>
+                <div>A Char represents a <span class="text-primary">32-bit Unicode </span>code point.</div>
+                <pre>
+                <code>
+                ch = 'c' # Char
+                puts sizeof(Char) # 4
+                </code>
+                </pre>
+            </section>
+            <section>
+                <h3>Symbol</h3>
+                <p>
+                    A Symbol represents a <span class="text-primary">unique name</span> inside the entire source code.
+                </p>
+                <pre>
+                <code>
+        :symbol
+        %i(crystal, ruby, rust) # [:crystal, :ruby, :rust]
+                </code>
+                </pre>
+            </section>
+        </section>
+
+    </div>
+</div>
+
+<script src="js/reveal.js"></script>
+
+<script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+        dependencies: [
+            {src: 'plugin/markdown/marked.js'},
+            {src: 'plugin/markdown/markdown.js'},
+            {src: 'plugin/notes/notes.js', async: true},
+            {src: 'plugin/highlight/highlight.js', async: true}
+        ]
+    });
+</script>
+</body>
 </html>
